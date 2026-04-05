@@ -14,12 +14,7 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 	if grep -q ^DATABASE_URL= .env; then
 		echo 'Waiting for database to be ready...'
 		ATTEMPTS_LEFT_TO_REACH_DATABASE=60
-		until [ $ATTEMPTS_LEFT_TO_REACH_DATABASE -eq 0 ] || DATABASE_ERROR=$(php bin/console dbal:run-sql -q "SELECT 1" 2>&1); do
-			if [ $? -eq 255 ]; then
-				# If the Doctrine command exits with 255, an unrecoverable error occurred
-				ATTEMPTS_LEFT_TO_REACH_DATABASE=0
-				break
-			fi
+		until [ $ATTEMPTS_LEFT_TO_REACH_DATABASE -eq 0 ] || DATABASE_ERROR=$(php -r 'try { $u = parse_url($_SERVER["DATABASE_URL"]); $dsn = sprintf("pgsql:host=%s;port=%s;dbname=%s", $u["host"], $u["port"] ?? 5432, ltrim($u["path"], "/")); new PDO($dsn, $u["user"] ?? "", $u["pass"] ?? ""); } catch (Throwable $e) { echo $e->getMessage(); exit(1); }' 2>&1); do
 			sleep 1
 			ATTEMPTS_LEFT_TO_REACH_DATABASE=$((ATTEMPTS_LEFT_TO_REACH_DATABASE - 1))
 			echo "Still waiting for database to be ready... Or maybe the database is not reachable. $ATTEMPTS_LEFT_TO_REACH_DATABASE attempts left."
@@ -31,10 +26,6 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 			exit 1
 		else
 			echo 'The database is now ready and reachable'
-		fi
-
-		if [ "$(find ./migrations -iname '*.php' -print -quit)" ]; then
-			php bin/console doctrine:migrations:migrate --no-interaction --all-or-nothing
 		fi
 	fi
 
