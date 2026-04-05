@@ -11,7 +11,7 @@ SYMFONY  = $(PHP) bin/console
 
 # Misc
 .DEFAULT_GOAL = help
-.PHONY        : help build up start down logs sh composer vendor sf cc test lint lint-fix stan
+.PHONY        : help build up start down logs sh composer vendor sf cc test lint lint-fix stan tw
 
 ## —— 🎵 🐳 The Symfony Docker Makefile 🐳 🎵 ——————————————————————————————————
 help: ## Outputs this help screen
@@ -51,6 +51,10 @@ lint-fix: ## Fix code style with PHP CS Fixer
 
 stan: ## Run PHPStan static analysis
 	@$(PHP_CONT) vendor/bin/phpstan analyse
+
+## —— Assets 🎨 ———————————————————————————————————————————————————————————————
+tw: ## Build Tailwind CSS in watch mode
+	@$(SYMFONY) tailwind:build --watch
 
 ## —— Composer 🧙 ——————————————————————————————————————————————————————————————
 composer: ## Run composer, pass the parameter "c=" to run a given command, example: make composer c='req symfony/orm-pack'
