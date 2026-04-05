@@ -88,3 +88,5 @@ jobs:
 
       - name: Check for security vulnerabilities
         run: composer audit
+        env:
+          COMPOSER_NO_AUDIT: 0
