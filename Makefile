@@ -11,7 +11,7 @@ SYMFONY  = $(PHP) bin/console
 
 # Misc
 .DEFAULT_GOAL = help
-.PHONY        : help build up start down logs sh composer vendor sf cc test lint lint-fix stan tw
+.PHONY        : help build up start down logs sh composer vendor sf cc test lint lint-fix lint-twig-fix stan tw before-commit
 
 ## —— 🎵 🐳 The Symfony Docker Makefile 🐳 🎵 ——————————————————————————————————
 help: ## Outputs this help screen
@@ -49,8 +49,13 @@ lint: ## Run PHP CS Fixer in dry-run mode
 lint-fix: ## Fix code style with PHP CS Fixer
 	@$(PHP_CONT) vendor/bin/php-cs-fixer fix
 
+lint-twig-fix: ## Sort Tailwind classes in Twig templates (write changes)
+	@$(PHP_CONT) vendor/bin/tailwind-cs-fixer templates
+
 stan: ## Run PHPStan static analysis
 	@$(PHP_CONT) vendor/bin/phpstan analyse
+
+before-commit: lint-fix lint-twig-fix stan test ## Fix code style then run static analysis and tests
 
 ## —— Assets 🎨 ———————————————————————————————————————————————————————————————
 tw: ## Build Tailwind CSS in watch mode
@@ -64,7 +69,6 @@ composer: ## Run composer, pass the parameter "c=" to run a given command, examp
 vendor: ## Install vendors according to the current composer.lock file
 vendor: c=install --prefer-dist --no-dev --no-progress --no-scripts --no-interaction
 vendor: composer
-
 ## —— Symfony 🎵 ———————————————————————————————————————————————————————————————
 sf: ## List all Symfony commands or pass the parameter "c=" to run a given command, example: make sf c=about
 	@$(eval c ?=)

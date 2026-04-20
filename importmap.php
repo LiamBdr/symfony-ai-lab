@@ -23,4 +23,10 @@ return [
         'path' => './assets/vendor/preline/variants.css',
         'type' => 'css',
     ],
+    'marked' => [
+        'version' => '18.0.2',
+    ],
+    'dompurify' => [
+        'version' => '3.4.0',
+    ],
 ];

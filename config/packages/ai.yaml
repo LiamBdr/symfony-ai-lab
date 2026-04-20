@@ -2,4 +2,22 @@ ai:
     platform:
         ollama:
             endpoint: '%env(OLLAMA_HOST_URL)%'
-            api_catalog: true
+
+    agent:
+        default:
+            model: '%env(OLLAMA_CHAT_MODEL)%'
+            prompt:
+                text: |
+                    You are a concise, helpful assistant.
+                    Answer directly and briefly. Match the user's language.
+                    Keep a relaxed, human tone, never cold or overly formal.
+
+    message_store:
+        session:
+            default:
+                identifier: 'chat'
+
+    chat:
+        default:
+            agent: 'ai.agent.default'
+            message_store: 'ai.message_store.session.default'

@@ -1,16 +1,64 @@
 @import "tailwindcss";
-@import '../vendor/preline/variants.css';
-
-/* Preline Themes */
+@import "../vendor/preline/variants.css";
 @import "./themes/theme.css";
 
-/* Adds pointer cursor to buttons */
-@layer base {
-  button:not(:disabled),
-  [role="button"]:not(:disabled) {
-    cursor: pointer;
-  }
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant hover (&:hover);
+
+@font-face {
+    font-family: 'Inter Tight';
+    src: url('../fonts/InterTight.ttf') format('truetype-variations');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
 }
 
-/* Defaults hover styles on all devices */
-@custom-variant hover (&:hover);
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('../fonts/JetBrainsMono.ttf') format('truetype-variations');
+    font-weight: 100 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@theme {
+    --font-sans: 'Inter Tight', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
+@layer base {
+    button:not(:disabled),
+    [role="button"]:not(:disabled) {
+        cursor: pointer;
+    }
+}
+
+@utility scrollbar-subtle {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: transparent;
+        border-radius: 9999px;
+        transition: background-color 200ms ease;
+    }
+
+    &:hover {
+        scrollbar-color: var(--color-scrollbar-thumb) transparent;
+    }
+
+    &:hover::-webkit-scrollbar-thumb {
+        background: var(--color-scrollbar-thumb);
+    }
+}

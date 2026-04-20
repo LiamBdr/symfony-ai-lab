@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Symfony AI Lab{% endblock %}
+
+{% block body %}
+    <main class="flex h-screen flex-col justify-between pb-4 pt-14 transition-all duration-300">
+        <div id="chat-messages" class="scrollbar-subtle mx-auto flex flex-1 overflow-y-auto w-full flex-col px-4 pb-10 sm:px-6 md:max-w-3xl lg:px-8">
+            <twig:Chat:Welcome />
+        </div>
+
+        <twig:Chat:Composer />
+    </main>
+
+    <twig:Chat:BubbleTemplates />
+{% endblock %}

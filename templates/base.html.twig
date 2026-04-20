@@ -2,9 +2,19 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
+        <script>
+            const html = document.querySelector('html');
+            const isLightOrAuto = localStorage.getItem('hs_theme') === 'light' || (localStorage.getItem('hs_theme') === 'auto' && !window.matchMedia('(prefers-color-scheme: dark)').matches);
+            const isDarkOrAuto = localStorage.getItem('hs_theme') === 'dark' || (localStorage.getItem('hs_theme') === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+            if (isLightOrAuto && html.classList.contains('dark')) html.classList.remove('dark');
+            else if (isDarkOrAuto && html.classList.contains('light')) html.classList.remove('light');
+            else if (isDarkOrAuto && !html.classList.contains('dark')) html.classList.add('dark');
+            else if (isLightOrAuto && !html.classList.contains('light')) html.classList.add('light');
+        </script>
         <title>{% block title %}{% endblock %}</title>
 
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <link rel="icon" href="favicon.ico">
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
         
         {% block stylesheets %}
@@ -26,6 +36,7 @@
         {% endif %}
     </head>
     <body class="bg-background">
+        <twig:Layout:Header />
         {% block body %}{% endblock %}
     </body>
 </html>
