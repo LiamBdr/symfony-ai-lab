@@ -38,10 +38,6 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 
 ENV PHP_INI_SCAN_DIR=":$PHP_INI_DIR/app.conf.d"
 
-###> recipes ###
-RUN install-php-extensions pdo_pgsql
-###< recipes ###
-
 COPY --link frankenphp/conf.d/10-app.ini $PHP_INI_DIR/app.conf.d/
 COPY --link --chmod=755 frankenphp/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 COPY --link frankenphp/Caddyfile /etc/frankenphp/Caddyfile
@@ -106,6 +102,7 @@ RUN <<-EOF
 	composer dump-env prod
 	composer run-script --no-dev post-install-cmd
 	if [ -f importmap.php ]; then
+		php bin/console tailwind:build --minify
 		php bin/console asset-map:compile
 	fi
 	chmod +x bin/console; sync
@@ -156,6 +153,11 @@ COPY --from=frankenphp_prod_builder /usr/lib/file/magic.mgc /usr/lib/file/magic.
 ENV XDG_CONFIG_HOME=/config XDG_DATA_HOME=/data
 
 RUN <<-EOF
+	apt-get update
+	apt-get install -y --no-install-recommends libcap2-bin
+	# Let the non-root www-data user bind ports < 1024 (:80 behind Traefik)
+	setcap cap_net_bind_service=+ep /usr/local/bin/frankenphp
+	rm -rf /var/lib/apt/lists/*
 	mkdir -p /data/caddy /config/caddy
 	chown -R www-data:www-data /data /config
 	# Remove setuid/setgid bits
@@ -175,5 +177,6 @@ WORKDIR /app
 
 ENTRYPOINT ["docker-entrypoint"]
 
-HEALTHCHECK --start-period=60s CMD php -r 'exit(false === @file_get_contents("http://localhost:2019/metrics", context: stream_context_create(["http" => ["timeout" => 5]])) ? 1 : 0);'
+HEALTHCHECK --start-period=60s --interval=30s --timeout=5s --retries=3 \
+  CMD php -r 'exit(false === @file_get_contents("http://localhost/healthz", context: stream_context_create(["http" => ["timeout" => 5]])) ? 1 : 0);'
 CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile" ]

@@ -4,8 +4,7 @@
 
 - PHP 8.5 / Symfony 8.0
 - FrankenPHP (Docker, multi-stage)
-- PostgreSQL 16 + pgvector (image `pgvector/pgvector:pg16`)
-- No Doctrine — raw PDO with pgvector extension
+- Ollama (local LLM runtime) via `symfony/ai-ollama-platform`
 - Twig + AssetMapper (importmap, no Webpack/Vite)
 - Tailwind CSS v4 (`symfonycasts/tailwind-bundle`)
 - Preline UI (component library, theme in `assets/styles/themes/theme.css`)

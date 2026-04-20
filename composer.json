@@ -12,7 +12,7 @@
         "symfony/ai-agent": "^0.7.0",
         "symfony/ai-bundle": "^0.7.0",
         "symfony/ai-chat": "^0.7.0",
-        "symfony/ai-ollama-platform": ">=0.7",
+        "symfony/ai-ollama-platform": "^0.7.0",
         "symfony/ai-session-message-store": "^0.7.0",
         "symfony/asset": "8.0.*",
         "symfony/asset-mapper": "8.0.*",
