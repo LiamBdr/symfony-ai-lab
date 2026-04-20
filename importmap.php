@@ -16,17 +16,13 @@ return [
         'path' => './assets/app.js',
         'entrypoint' => true,
     ],
-    'preline' => [
-        'path' => './assets/vendor/preline/preline.js',
-    ],
-    'preline/variants.css' => [
-        'path' => './assets/vendor/preline/variants.css',
-        'type' => 'css',
-    ],
     'marked' => [
         'version' => '18.0.2',
     ],
     'dompurify' => [
         'version' => '3.4.0',
+    ],
+    'preline' => [
+        'version' => '4.1.3',
     ],
 ];

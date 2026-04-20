@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "../vendor/preline/variants.css";
+@import "./preline.css";
 @import "./themes/theme.css";
 
 @plugin "@tailwindcss/typography";
