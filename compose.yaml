@@ -35,10 +35,18 @@ services:
   ollama:
     image: ollama/ollama:latest
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "3.0"
+          memory: 5G
+        reservations:
+          memory: 3G
     environment:
       OLLAMA_HOST: 0.0.0.0
       OLLAMA_MAX_LOADED_MODELS: "1"
       OLLAMA_NUM_PARALLEL: "1"
+      OLLAMA_KEEP_ALIVE: "5m"
     volumes:
       - ollama_data:/root/.ollama
     healthcheck:
