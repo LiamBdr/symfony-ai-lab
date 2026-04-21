@@ -144,6 +144,8 @@ async function handleSubmit() {
     const message = textarea.value.trim();
     if (!message) return;
 
+    window.umami?.track('chat-message-sent', {length: message.length});
+
     textarea.value = '';
     textarea.style.height = 'auto';
 
