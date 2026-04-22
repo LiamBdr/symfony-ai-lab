@@ -270,8 +270,8 @@
 
 :root {
   /* Bone & Ink palette */
-  --bone: #E8E4DC;
-  --bone-deep: #DDD6C7;
+  --bone: #f5f3f0;
+  --bone-deep: #ece8e0;
   --ink: #0E0E0C;
   --ink-soft: #2A2925;
   --tone-muted: #6A655A;
