@@ -38,6 +38,9 @@ export async function streamChat(message, outputElement, metaElement, signal) {
 
         const {token} = parsed;
         if (token === undefined) return null;
+        if (!outputElement.dataset.hasContent) {
+            outputElement.dataset.hasContent = 'true';
+        }
         rawText += token;
         const fragment = DOMPurify.sanitize(marked.parse(rawText), {RETURN_DOM_FRAGMENT: true});
         outputElement.replaceChildren(fragment);
@@ -168,7 +171,7 @@ async function handleSubmit() {
             throw error;
         }
     } finally {
-        if (outputElement.childNodes.length === 0) {
+        if (outputElement.dataset.hasContent !== 'true') {
             aiBubble.remove();
         }
         currentController = null;
