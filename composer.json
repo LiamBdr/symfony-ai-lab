@@ -21,6 +21,7 @@
         "symfony/flex": "^2.10",
         "symfony/framework-bundle": "8.0.*",
         "symfony/runtime": "8.0.*",
+        "symfony/stimulus-bundle": "^3.0",
         "symfony/twig-bundle": "8.0.*",
         "symfony/ux-icons": "^3.0",
         "symfony/ux-twig-component": "^3.0",
