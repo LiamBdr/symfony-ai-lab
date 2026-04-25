@@ -7,10 +7,8 @@ ai:
         default:
             model: '%env(OLLAMA_CHAT_MODEL)%'
             prompt:
-                text: |
-                    You are a concise, helpful assistant.
-                    Answer directly and briefly. Match the user's language.
-                    Keep a relaxed, human tone, never cold or overly formal.
+                file: '%kernel.project_dir%/prompts/default.txt'
+                include_tools: true
 
     message_store:
         session:

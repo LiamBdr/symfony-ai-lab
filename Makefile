@@ -53,7 +53,7 @@ lint-twig-fix: ## Sort Tailwind classes in Twig templates (write changes)
 	@$(PHP_CONT) vendor/bin/tailwind-cs-fixer templates
 
 stan: ## Run PHPStan static analysis
-	@$(PHP_CONT) vendor/bin/phpstan analyse
+	@$(PHP_CONT) vendor/bin/phpstan analyse --memory-limit=512M
 
 before-commit: lint-fix lint-twig-fix stan test ## Fix code style then run static analysis and tests
 
