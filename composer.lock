@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e05c0f03b93a8b42522364069fe52113",
+    "content-hash": "b5243e839690f5484865e30a40a02df9",
     "packages": [
         {
             "name": "composer/semver",
@@ -658,16 +658,16 @@
         },
         {
             "name": "symfony/ai-agent",
-            "version": "v0.7.0",
+            "version": "v0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ai-agent.git",
-                "reference": "08f693e22d0584ef5a04ee5f37a449a947eb63a4"
+                "reference": "c99544b635358ca0a931271de0614d2ba2464c3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ai-agent/zipball/08f693e22d0584ef5a04ee5f37a449a947eb63a4",
-                "reference": "08f693e22d0584ef5a04ee5f37a449a947eb63a4",
+                "url": "https://api.github.com/repos/symfony/ai-agent/zipball/c99544b635358ca0a931271de0614d2ba2464c3c",
+                "reference": "c99544b635358ca0a931271de0614d2ba2464c3c",
                 "shasum": ""
             },
             "require": {
@@ -676,7 +676,7 @@
                 "phpdocumentor/reflection-docblock": "^5.4|^6.0",
                 "phpstan/phpdoc-parser": "^2.1",
                 "psr/log": "^3.0",
-                "symfony/ai-platform": "^0.7",
+                "symfony/ai-platform": "^0.8",
                 "symfony/clock": "^7.3|^8.0",
                 "symfony/http-client": "^7.3|^8.0",
                 "symfony/polyfill-php85": "^1.33",
@@ -690,7 +690,7 @@
                 "phpstan/phpstan-phpunit": "^2.0",
                 "phpstan/phpstan-strict-rules": "^2.0",
                 "phpunit/phpunit": "^11.5.53",
-                "symfony/ai-store": "^0.7",
+                "symfony/ai-store": "^0.8",
                 "symfony/event-dispatcher": "^7.3|^8.0",
                 "symfony/translation": "^7.3|^8.0",
                 "symfony/translation-contracts": "^3.6",
@@ -733,7 +733,7 @@
                 "llm"
             ],
             "support": {
-                "source": "https://github.com/symfony/ai-agent/tree/v0.7.0"
+                "source": "https://github.com/symfony/ai-agent/tree/v0.8.0"
             },
             "funding": [
                 {
@@ -753,25 +753,25 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-09T22:05:57+00:00"
+            "time": "2026-04-20T21:23:24+00:00"
         },
         {
             "name": "symfony/ai-bundle",
-            "version": "v0.7.0",
+            "version": "v0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ai-bundle.git",
-                "reference": "79cfdd5a597267b1b6502d751ae292bcb6411614"
+                "reference": "847365e0f885f8814421e9c94f03ce19e0b54bbc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ai-bundle/zipball/79cfdd5a597267b1b6502d751ae292bcb6411614",
-                "reference": "79cfdd5a597267b1b6502d751ae292bcb6411614",
+                "url": "https://api.github.com/repos/symfony/ai-bundle/zipball/847365e0f885f8814421e9c94f03ce19e0b54bbc",
+                "reference": "847365e0f885f8814421e9c94f03ce19e0b54bbc",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.2",
-                "symfony/ai-platform": "^0.7",
+                "symfony/ai-platform": "^0.8",
                 "symfony/clock": "^7.3|^8.0",
                 "symfony/config": "^7.3|^8.0",
                 "symfony/console": "^7.3|^8.0",
@@ -786,72 +786,72 @@
                 "phpstan/phpstan-phpunit": "^2.0",
                 "phpstan/phpstan-strict-rules": "^2.0",
                 "phpunit/phpunit": "^11.5.53",
-                "symfony/ai-agent": "^0.7",
-                "symfony/ai-ai-ml-api-platform": "^0.7",
-                "symfony/ai-albert-platform": "^0.7",
-                "symfony/ai-amazee-ai-platform": "^0.7",
-                "symfony/ai-anthropic-platform": "^0.7",
-                "symfony/ai-azure-platform": "^0.7",
-                "symfony/ai-azure-search-store": "^0.7",
-                "symfony/ai-bedrock-platform": "^0.7",
-                "symfony/ai-cache-message-store": "^0.7",
-                "symfony/ai-cache-platform": "^0.7",
-                "symfony/ai-cache-store": "^0.7",
-                "symfony/ai-cartesia-platform": "^0.7",
-                "symfony/ai-cerebras-platform": "^0.7",
-                "symfony/ai-chat": "^0.7",
-                "symfony/ai-chroma-db-store": "^0.7",
-                "symfony/ai-click-house-store": "^0.7",
-                "symfony/ai-cloudflare-message-store": "^0.7",
-                "symfony/ai-cloudflare-store": "^0.7",
-                "symfony/ai-decart-platform": "^0.7",
-                "symfony/ai-deep-seek-platform": "^0.7",
-                "symfony/ai-docker-model-runner-platform": "^0.7",
-                "symfony/ai-doctrine-message-store": "^0.7",
-                "symfony/ai-elasticsearch-store": "^0.7",
-                "symfony/ai-eleven-labs-platform": "^0.7",
-                "symfony/ai-failover-platform": "^0.7",
-                "symfony/ai-gemini-platform": "^0.7",
-                "symfony/ai-generic-platform": "^0.7",
-                "symfony/ai-hugging-face-platform": "^0.7",
-                "symfony/ai-lm-studio-platform": "^0.7",
-                "symfony/ai-manticore-search-store": "^0.7",
-                "symfony/ai-maria-db-store": "^0.7",
-                "symfony/ai-meilisearch-message-store": "^0.7",
-                "symfony/ai-meilisearch-store": "^0.7",
-                "symfony/ai-meta-platform": "^0.7",
-                "symfony/ai-milvus-store": "^0.7",
-                "symfony/ai-mistral-platform": "^0.7",
-                "symfony/ai-mongo-db-message-store": "^0.7",
-                "symfony/ai-mongo-db-store": "^0.7",
-                "symfony/ai-neo4j-store": "^0.7",
-                "symfony/ai-ollama-platform": "^0.7",
-                "symfony/ai-open-ai-platform": "^0.7",
-                "symfony/ai-open-responses-platform": "^0.7",
-                "symfony/ai-open-router-platform": "^0.7",
-                "symfony/ai-open-search-store": "^0.7",
-                "symfony/ai-perplexity-platform": "^0.7",
-                "symfony/ai-pinecone-store": "^0.7",
-                "symfony/ai-pogocache-message-store": "^0.7",
-                "symfony/ai-postgres-store": "^0.7",
-                "symfony/ai-qdrant-store": "^0.7",
-                "symfony/ai-redis-message-store": "^0.7",
-                "symfony/ai-redis-store": "^0.7",
-                "symfony/ai-replicate-platform": "^0.7",
-                "symfony/ai-s3vectors-store": "^0.7",
-                "symfony/ai-scaleway-platform": "^0.7",
-                "symfony/ai-session-message-store": "^0.7",
-                "symfony/ai-sqlite-store": "^0.7",
-                "symfony/ai-store": "^0.7",
-                "symfony/ai-supabase-store": "^0.7",
-                "symfony/ai-surreal-db-message-store": "^0.7",
-                "symfony/ai-surreal-db-store": "^0.7",
-                "symfony/ai-transformers-php-platform": "^0.7",
-                "symfony/ai-typesense-store": "^0.7",
-                "symfony/ai-vektor-store": "^0.7",
-                "symfony/ai-vertex-ai-platform": "^0.7",
-                "symfony/ai-voyage-platform": "^0.7",
-                "symfony/ai-weaviate-store": "^0.7",
+                "symfony/ai-agent": "^0.8",
+                "symfony/ai-ai-ml-api-platform": "^0.8",
+                "symfony/ai-albert-platform": "^0.8",
+                "symfony/ai-amazee-ai-platform": "^0.8",
+                "symfony/ai-anthropic-platform": "^0.8",
+                "symfony/ai-azure-platform": "^0.8",
+                "symfony/ai-azure-search-store": "^0.8",
+                "symfony/ai-bedrock-platform": "^0.8",
+                "symfony/ai-cache-message-store": "^0.8",
+                "symfony/ai-cache-platform": "^0.8",
+                "symfony/ai-cache-store": "^0.8",
+                "symfony/ai-cartesia-platform": "^0.8",
+                "symfony/ai-cerebras-platform": "^0.8",
+                "symfony/ai-chat": "^0.8",
+                "symfony/ai-chroma-db-store": "^0.8",
+                "symfony/ai-click-house-store": "^0.8",
+                "symfony/ai-cloudflare-message-store": "^0.8",
+                "symfony/ai-cloudflare-store": "^0.8",
+                "symfony/ai-decart-platform": "^0.8",
+                "symfony/ai-deep-seek-platform": "^0.8",
+                "symfony/ai-docker-model-runner-platform": "^0.8",
+                "symfony/ai-doctrine-message-store": "^0.8",
+                "symfony/ai-elasticsearch-store": "^0.8",
+                "symfony/ai-eleven-labs-platform": "^0.8",
+                "symfony/ai-failover-platform": "^0.8",
+                "symfony/ai-gemini-platform": "^0.8",
+                "symfony/ai-generic-platform": "^0.8",
+                "symfony/ai-hugging-face-platform": "^0.8",
+                "symfony/ai-lm-studio-platform": "^0.8",
+                "symfony/ai-manticore-search-store": "^0.8",
+                "symfony/ai-maria-db-store": "^0.8",
+                "symfony/ai-meilisearch-message-store": "^0.8",
+                "symfony/ai-meilisearch-store": "^0.8",
+                "symfony/ai-meta-platform": "^0.8",
+                "symfony/ai-milvus-store": "^0.8",
+                "symfony/ai-mistral-platform": "^0.8",
+                "symfony/ai-mongo-db-message-store": "^0.8",
+                "symfony/ai-mongo-db-store": "^0.8",
+                "symfony/ai-neo4j-store": "^0.8",
+                "symfony/ai-ollama-platform": "^0.8",
+                "symfony/ai-open-ai-platform": "^0.8",
+                "symfony/ai-open-responses-platform": "^0.8",
+                "symfony/ai-open-router-platform": "^0.8",
+                "symfony/ai-open-search-store": "^0.8",
+                "symfony/ai-perplexity-platform": "^0.8",
+                "symfony/ai-pinecone-store": "^0.8",
+                "symfony/ai-pogocache-message-store": "^0.8",
+                "symfony/ai-postgres-store": "^0.8",
+                "symfony/ai-qdrant-store": "^0.8",
+                "symfony/ai-redis-message-store": "^0.8",
+                "symfony/ai-redis-store": "^0.8",
+                "symfony/ai-replicate-platform": "^0.8",
+                "symfony/ai-s3vectors-store": "^0.8",
+                "symfony/ai-scaleway-platform": "^0.8",
+                "symfony/ai-session-message-store": "^0.8",
+                "symfony/ai-sqlite-store": "^0.8",
+                "symfony/ai-store": "^0.8",
+                "symfony/ai-supabase-store": "^0.8",
+                "symfony/ai-surreal-db-message-store": "^0.8",
+                "symfony/ai-surreal-db-store": "^0.8",
+                "symfony/ai-transformers-php-platform": "^0.8",
+                "symfony/ai-typesense-store": "^0.8",
+                "symfony/ai-vektor-store": "^0.8",
+                "symfony/ai-vertex-ai-platform": "^0.8",
+                "symfony/ai-voyage-platform": "^0.8",
+                "symfony/ai-weaviate-store": "^0.8",
                 "symfony/expression-language": "^7.3|^8.0",
                 "symfony/security-core": "^7.3|^8.0",
                 "symfony/translation": "^7.3|^8.0",
@@ -889,7 +889,7 @@
             ],
             "description": "Integration bundle for Symfony AI components",
             "support": {
-                "source": "https://github.com/symfony/ai-bundle/tree/v0.7.0"
+                "source": "https://github.com/symfony/ai-bundle/tree/v0.8.0"
             },
             "funding": [
                 {
@@ -909,26 +909,26 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-09T22:05:57+00:00"
+            "time": "2026-04-20T21:23:24+00:00"
         },
         {
             "name": "symfony/ai-chat",
-            "version": "v0.7.0",
+            "version": "v0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ai-chat.git",
-                "reference": "5aeea2dd3211a9bfbcf1f22b76ca524ab8b8dc8b"
+                "reference": "0322e0d6648a5af27870f564a224fb7b8fcbf341"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ai-chat/zipball/5aeea2dd3211a9bfbcf1f22b76ca524ab8b8dc8b",
-                "reference": "5aeea2dd3211a9bfbcf1f22b76ca524ab8b8dc8b",
+                "url": "https://api.github.com/repos/symfony/ai-chat/zipball/0322e0d6648a5af27870f564a224fb7b8fcbf341",
+                "reference": "0322e0d6648a5af27870f564a224fb7b8fcbf341",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.2",
-                "symfony/ai-agent": "^0.7",
-                "symfony/ai-platform": "^0.7",
+                "symfony/ai-agent": "^0.8",
+                "symfony/ai-platform": "^0.8",
                 "symfony/service-contracts": "^2.5|^3"
             },
             "require-dev": {
@@ -979,7 +979,7 @@
                 "llm"
             ],
             "support": {
-                "source": "https://github.com/symfony/ai-chat/tree/v0.7.0"
+                "source": "https://github.com/symfony/ai-chat/tree/v0.8.0"
             },
             "funding": [
                 {
@@ -999,25 +999,25 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-09T22:05:57+00:00"
+            "time": "2026-04-20T21:23:24+00:00"
         },
         {
             "name": "symfony/ai-ollama-platform",
-            "version": "v0.7.0",
+            "version": "v0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ai-ollama-platform.git",
-                "reference": "6d7620c051243d0a778cbd704ac3b7de38bec733"
+                "reference": "c3a7f027e488919414b4d17a29c230ab20cd74c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ai-ollama-platform/zipball/6d7620c051243d0a778cbd704ac3b7de38bec733",
-                "reference": "6d7620c051243d0a778cbd704ac3b7de38bec733",
+                "url": "https://api.github.com/repos/symfony/ai-ollama-platform/zipball/c3a7f027e488919414b4d17a29c230ab20cd74c9",
+                "reference": "c3a7f027e488919414b4d17a29c230ab20cd74c9",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.2",
-                "symfony/ai-platform": "^0.7",
+                "symfony/ai-platform": "^0.8",
                 "symfony/http-client": "^7.3|^8.0"
             },
             "require-dev": {
@@ -1065,7 +1065,7 @@
                 "platform"
             ],
             "support": {
-                "source": "https://github.com/symfony/ai-ollama-platform/tree/v0.7.0"
+                "source": "https://github.com/symfony/ai-ollama-platform/tree/v0.8.0"
             },
             "funding": [
                 {
@@ -1085,20 +1085,104 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-09T22:05:57+00:00"
+            "time": "2026-04-20T21:23:24+00:00"
         },
         {
-            "name": "symfony/ai-platform",
-            "version": "v0.7.0",
+            "name": "symfony/ai-ollama-tool",
+            "version": "v0.8.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/ai-platform.git",
-                "reference": "0527556737a991824105dd0443ba4e699978b4b0"
+                "url": "https://github.com/symfony/ai-ollama-tool.git",
+                "reference": "10ff5266842fc59560fe670f8726334b89a8da99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ai-platform/zipball/0527556737a991824105dd0443ba4e699978b4b0",
-                "reference": "0527556737a991824105dd0443ba4e699978b4b0",
+                "url": "https://api.github.com/repos/symfony/ai-ollama-tool/zipball/10ff5266842fc59560fe670f8726334b89a8da99",
+                "reference": "10ff5266842fc59560fe670f8726334b89a8da99",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "symfony/ai-agent": "^0.8",
+                "symfony/http-client": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^11.5.53",
+                "symfony/ai-platform": "^0.8"
+            },
+            "type": "symfony-ai-tool",
+            "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/ai",
+                    "name": "symfony/ai"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\AI\\Agent\\Bridge\\Ollama\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guillaume Loulier",
+                    "email": "personal@guillaumeloulier.fr"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Ollama AI tool bridge for Symfony applications.",
+            "keywords": [
+                "Agent",
+                "Bridge",
+                "ai",
+                "ollama",
+                "tool",
+                "web-search "
+            ],
+            "support": {
+                "source": "https://github.com/symfony/ai-ollama-tool/tree/v0.8.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-04-20T21:23:24+00:00"
+        },
+        {
+            "name": "symfony/ai-platform",
+            "version": "v0.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/ai-platform.git",
+                "reference": "86ed9396f53cad02b5d1ca8092956ea74f65823f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/ai-platform/zipball/86ed9396f53cad02b5d1ca8092956ea74f65823f",
+                "reference": "86ed9396f53cad02b5d1ca8092956ea74f65823f",
                 "shasum": ""
             },
             "require": {
@@ -1197,7 +1281,7 @@
                 "voyage"
             ],
             "support": {
-                "source": "https://github.com/symfony/ai-platform/tree/v0.7.0"
+                "source": "https://github.com/symfony/ai-platform/tree/v0.8.1"
             },
             "funding": [
                 {
@@ -1217,25 +1301,25 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-09T21:07:28+00:00"
+            "time": "2026-04-20T21:28:38+00:00"
         },
         {
             "name": "symfony/ai-session-message-store",
-            "version": "v0.7.0",
+            "version": "v0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ai-session-message-store.git",
-                "reference": "70df45de30caa19ae836c03fca2f275468a8466f"
+                "reference": "b38a8d881d58e71fd9b23e8bc0142c2237bcbb10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ai-session-message-store/zipball/70df45de30caa19ae836c03fca2f275468a8466f",
-                "reference": "70df45de30caa19ae836c03fca2f275468a8466f",
+                "url": "https://api.github.com/repos/symfony/ai-session-message-store/zipball/b38a8d881d58e71fd9b23e8bc0142c2237bcbb10",
+                "reference": "b38a8d881d58e71fd9b23e8bc0142c2237bcbb10",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.2",
-                "symfony/ai-chat": "^0.7",
+                "symfony/ai-chat": "^0.8",
                 "symfony/http-foundation": "^7.3|^8.0"
             },
             "require-dev": {
@@ -1283,7 +1367,7 @@
                 "session"
             ],
             "support": {
-                "source": "https://github.com/symfony/ai-session-message-store/tree/v0.7.0"
+                "source": "https://github.com/symfony/ai-session-message-store/tree/v0.8.0"
             },
             "funding": [
                 {
@@ -1303,7 +1387,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-09T22:05:57+00:00"
+            "time": "2026-04-20T21:23:24+00:00"
         },
         {
             "name": "symfony/asset",

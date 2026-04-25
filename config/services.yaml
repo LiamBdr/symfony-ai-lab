@@ -15,5 +15,6 @@ services:
     App\:
         resource: '../src/'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    Symfony\AI\Agent\Bridge\Ollama\Ollama:
+        arguments:
+            $apiKey: '%env(OLLAMA_API_KEY)%'
