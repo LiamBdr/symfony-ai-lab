@@ -1,7 +1,7 @@
 #syntax=docker/dockerfile:1
 
 # Versions
-FROM dunglas/frankenphp:1-php8.5 AS frankenphp_upstream
+FROM dunglas/frankenphp:1.13-php8.5-trixie AS frankenphp_upstream
 
 # The different stages of this Dockerfile are meant to be built into separate images
 # https://docs.docker.com/build/building/multi-stage/#stop-at-a-specific-build-stage
@@ -14,8 +14,6 @@ FROM frankenphp_upstream AS frankenphp_base
 SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
 
 WORKDIR /app
-
-VOLUME /app/var/
 
 # persistent deps
 # hadolint ignore=DL3008
@@ -38,6 +36,9 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 
 ENV PHP_INI_SCAN_DIR=":$PHP_INI_DIR/app.conf.d"
 
+###> recipes ###
+###< recipes ###
+
 COPY --link frankenphp/conf.d/10-app.ini $PHP_INI_DIR/app.conf.d/
 COPY --link --chmod=755 frankenphp/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 COPY --link frankenphp/Caddyfile /etc/frankenphp/Caddyfile
@@ -55,24 +56,10 @@ ENV XDEBUG_MODE=off
 ENV FRANKENPHP_WORKER_CONFIG=watch
 
 # dev dependencies
-# hadolint ignore=DL3008
 RUN <<-EOF
 	mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
-	apt-get update
-	apt-get install -y --no-install-recommends \
-		aggregate \
-		curl \
-		dnsmasq \
-		dnsutils \
-		iproute2 \
-		ipset \
-		iptables \
-		jq \
-		sudo
 	install-php-extensions xdebug
-	rm -rf /var/lib/apt/lists/*
 	useradd -m -s /bin/bash nonroot
-	echo "nonroot ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/nonroot
 	git config --system --add safe.directory /app
 EOF
 
@@ -121,7 +108,6 @@ RUN <<-'EOF'
 			[ -f "$lib" ] && cp -n "$lib" /tmp/libs/
 		done
 	done
-	sed -i 's/opcache.preload_user = root/opcache.preload_user = www-data/' "$PHP_INI_DIR/app.conf.d/20-app.prod.ini"
 	rm -rf /var/lib/apt/lists/*
 EOF
 
@@ -147,10 +133,11 @@ COPY --from=frankenphp_prod_builder /etc/frankenphp/Caddyfile /etc/frankenphp/Ca
 
 # CA certificates for TLS, file/libmagic for Symfony MIME type detection
 COPY --from=frankenphp_prod_builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+COPY --from=frankenphp_prod_builder /etc/ssl/openssl.cnf /etc/ssl/openssl.cnf
 COPY --from=frankenphp_prod_builder /usr/bin/file /usr/bin/file
 COPY --from=frankenphp_prod_builder /usr/lib/file/magic.mgc /usr/lib/file/magic.mgc
 
-ENV XDG_CONFIG_HOME=/config XDG_DATA_HOME=/data
+ENV OPENSSL_CONF=/etc/ssl/openssl.cnf XDG_CONFIG_HOME=/config XDG_DATA_HOME=/data SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
 RUN <<-EOF
 	apt-get update
@@ -168,8 +155,6 @@ COPY --link --exclude=var --from=frankenphp_prod_builder /app /app
 COPY --chown=www-data:www-data --from=frankenphp_prod_builder /app/var /app/var
 
 COPY --link --chmod=755 frankenphp/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
-
-VOLUME /app/var/
 
 USER www-data
 

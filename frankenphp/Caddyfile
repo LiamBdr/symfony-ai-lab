@@ -27,27 +27,16 @@
 	}
 
 	root /app/public
-	encode zstd br gzip
-
-	mercure {
-		# Publisher JWT key
-		publisher_jwt {env.MERCURE_PUBLISHER_JWT_KEY} {env.MERCURE_PUBLISHER_JWT_ALG}
-		# Subscriber JWT key
-		subscriber_jwt {env.MERCURE_SUBSCRIBER_JWT_KEY} {env.MERCURE_SUBSCRIBER_JWT_ALG}
-		# Allow anonymous subscribers (double-check that it's what you want)
-		anonymous
-		# Enable the subscription API (double-check that it's what you want)
-		subscriptions
-		# Extra directives
-		{$MERCURE_EXTRA_DIRECTIVES}
+	# Compressed SSE streams cost memory per connection and enable BREACH-style attacks
+	@compressible {
+		not path /.well-known/mercure*
+		not vars {http.request.orig_uri.path} /chat/stream
 	}
+	encode @compressible zstd br gzip
 
 	vulcain
 
 	{$CADDY_SERVER_EXTRA_DIRECTIVES}
-
-	# Disable Topics tracking if not enabled explicitly: https://github.com/jkarlin/topics
-	header ?Permissions-Policy "browsing-topics=()"
 
 	# Health endpoint for container / reverse proxy liveness probes
 	@healthz path /healthz

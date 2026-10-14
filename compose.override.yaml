@@ -17,13 +17,15 @@ services:
     environment:
       FRANKENPHP_WORKER_CONFIG: watch
       FRANKENPHP_SITE_CONFIG: hot_reload
-      MERCURE_EXTRA_DIRECTIVES: demo
+      # Mercure hub used by FrankenPHP hot reload only (dev)
+      CADDY_SERVER_EXTRA_DIRECTIVES: |
+        mercure {
+          name default
+          anonymous
+        }
       # See https://xdebug.org/docs/all_settings#mode
       XDEBUG_MODE: "${XDEBUG_MODE:-develop}"
       APP_ENV: "${APP_ENV:-dev}"
-      # Uses the Ollama instance running on the host machine.
-      # Remove this override to route the dev traffic to the bundled ollama container instead.
-      OLLAMA_HOST_URL: "${OLLAMA_HOST_URL:-http://host.docker.internal:11434}"
     extra_hosts:
       # Ensure that host.docker.internal is correctly defined on Linux
       - host.docker.internal:host-gateway

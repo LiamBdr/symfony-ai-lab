@@ -12,6 +12,7 @@ final class OllamaDefaultOptionsProcessor implements InputProcessorInterface
         $input->setOptions([
             'think' => false,
             'num_predict' => 500,
+            'num_thread' => 3,
             ...$input->getOptions(),
         ]);
     }

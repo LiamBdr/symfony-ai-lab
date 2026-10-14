@@ -3,12 +3,9 @@
 namespace App\Controller;
 
 use Symfony\AI\Agent\AgentInterface;
-use Symfony\AI\Chat\ChatStreamListener;
 use Symfony\AI\Chat\ManagedStoreInterface;
 use Symfony\AI\Chat\MessageStoreInterface;
 use Symfony\AI\Platform\Message\Message;
-use Symfony\AI\Platform\Result\Stream\Delta\TextDelta;
-use Symfony\AI\Platform\Result\StreamResult;
 use Symfony\AI\Platform\TokenUsage\TokenUsageInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
@@ -16,6 +13,7 @@ use Symfony\Component\HttpFoundation\EventStreamResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ServerEvent;
+use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class ChatController extends AbstractController
@@ -35,7 +33,10 @@ final class ChatController extends AbstractController
         #[Autowire(env: 'OLLAMA_CHAT_MODEL')] string $chatModel,
         #[Autowire(service: 'ai.agent.default')] AgentInterface $agent,
         #[Autowire(service: 'ai.message_store.session.default')] MessageStoreInterface $store,
+        #[Autowire(service: 'profiler')] ?Profiler $profiler,
     ): EventStreamResponse {
+        $profiler?->disable();
+
         $userMessage = $request->getPayload()->getString('message');
 
         return new EventStreamResponse(static function () use ($agent, $store, $userMessage, $chatModel): iterable {
@@ -44,24 +45,23 @@ final class ChatController extends AbstractController
             $messages = $store->load();
             $messages->add(Message::ofUser($userMessage));
 
-            $result = $agent->call($messages, ['stream' => true]);
-            \assert($result instanceof StreamResult);
-            $result->addListener(new ChatStreamListener($messages, $store));
-
             $startedAt = hrtime(true);
 
-            foreach ($result->getContent() as $delta) {
-                if (!$delta instanceof TextDelta) {
-                    continue;
-                }
+            $execution = $agent->call($messages, ['stream' => true]);
 
+            foreach ($execution->asTextStream() as $delta) {
                 $content = (string) $delta;
                 if ('' !== $content) {
                     yield new ServerEvent(json_encode(['token' => $content], \JSON_THROW_ON_ERROR));
                 }
             }
 
-            $usage = $result->getMetadata()->get('token_usage');
+            $assistantMessage = Message::ofAssistant($execution->getResult());
+            $assistantMessage->getMetadata()->merge($execution->getMetadata());
+            $messages->add($assistantMessage);
+            $store->save($messages);
+
+            $usage = $execution->getMetadata()->get('token_usage');
             $completionTokens = $usage instanceof TokenUsageInterface ? $usage->getCompletionTokens() : null;
             $durationMs = (int) ((hrtime(true) - $startedAt) / 1_000_000);
 

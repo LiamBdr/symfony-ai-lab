@@ -9,6 +9,8 @@ ai:
             prompt:
                 file: '%kernel.project_dir%/prompts/default.txt'
                 include_tools: true
+            tools: true
+            exclude_tool_messages: true
 
     message_store:
         session:
