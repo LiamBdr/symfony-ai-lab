@@ -1,5 +1,5 @@
 <div class="sticky bottom-0 z-10 mx-auto w-full bg-background px-4 pb-4 sm:px-6 md:max-w-3xl lg:px-8">
-    <div id="chat-form" class="rounded-3xl border border-line-3 bg-layer px-2 pb-2 shadow-xs">
+    <div id="chat-form" data-csrf-token="{{ csrf_token('chat') }}" class="rounded-3xl border border-line-3 bg-layer px-2 pb-2 shadow-xs">
         <label for="chat-textarea" class="sr-only">Ask anything...</label>
 
         <textarea id="chat-textarea" class="mt-2 block overflow-y-auto max-h-36 [&::-webkit-scrollbar]:w-2 w-full [&::-webkit-scrollbar-thumb]:rounded-none border-transparent bg-transparent [&::-webkit-scrollbar-thumb]:bg-scrollbar-thumb pb-2 pt-4 ps-2 pe-4 placeholder:text-muted-foreground-1 text-foreground resize-none focus:border-transparent focus:outline-hidden focus:ring-transparent disabled:opacity-50 disabled:pointer-events-none" placeholder="Ask anything..." data-hs-textarea-auto-height></textarea>

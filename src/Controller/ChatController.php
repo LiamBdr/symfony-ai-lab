@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Dto\ChatMessageInput;
 use Symfony\AI\Agent\AgentInterface;
 use Symfony\AI\Chat\ManagedStoreInterface;
 use Symfony\AI\Chat\MessageStoreInterface;
@@ -10,11 +11,13 @@ use Symfony\AI\Platform\TokenUsage\TokenUsageInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\EventStreamResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ServerEvent;
+use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
+use Symfony\Component\HttpKernel\Attribute\RateLimit;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsCsrfTokenValid;
 
 final class ChatController extends AbstractController
 {
@@ -27,9 +30,11 @@ final class ChatController extends AbstractController
         return $this->render('chat.html.twig');
     }
 
-    #[Route('/chat/stream', name: 'app_chat_stream', methods: ['POST'])]
+    #[Route('/chat/stream', name: 'app_chat_stream', methods: ['POST'], format: 'json')]
+    #[RateLimit('chat')]
+    #[IsCsrfTokenValid('chat', tokenKey: 'X-CSRF-Token', tokenSource: IsCsrfTokenValid::SOURCE_HEADER)]
     public function send(
-        Request $request,
+        #[MapRequestPayload(acceptFormat: 'json')] ChatMessageInput $input,
         #[Autowire(env: 'OLLAMA_CHAT_MODEL')] string $chatModel,
         #[Autowire(service: 'ai.agent.default')] AgentInterface $agent,
         #[Autowire(service: 'ai.message_store.session.default')] MessageStoreInterface $store,
@@ -37,7 +42,7 @@ final class ChatController extends AbstractController
     ): EventStreamResponse {
         $profiler?->disable();
 
-        $userMessage = $request->getPayload()->getString('message');
+        $userMessage = $input->message;
 
         return new EventStreamResponse(static function () use ($agent, $store, $userMessage, $chatModel): iterable {
             set_time_limit(0);

@@ -3,16 +3,17 @@ import DOMPurify from 'dompurify';
 
 let currentController = null;
 
-export async function streamChat(message, outputElement, metaElement, signal) {
+export async function streamChat(message, csrfToken, outputElement, metaElement, signal) {
     const response = await fetch('/chat/stream', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json', 'X-CSRF-Token': csrfToken},
         body: JSON.stringify({message}),
         signal,
     });
 
     if (!response.ok) {
-        outputElement.textContent = 'Erreur: ' + response.statusText;
+        outputElement.dataset.hasContent = 'true';
+        outputElement.textContent = `Error: ${response.status} ${response.statusText}`.trim();
         return false;
     }
 
@@ -165,7 +166,7 @@ async function handleSubmit() {
 
     currentController = new AbortController();
     try {
-        await streamChat(message, outputElement, metaElement, currentController.signal);
+        await streamChat(message, document.getElementById('chat-form').dataset.csrfToken, outputElement, metaElement, currentController.signal);
     } catch (error) {
         if (error.name !== 'AbortError') {
             throw error;
